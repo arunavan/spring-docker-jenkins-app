@@ -24,7 +24,7 @@ pipeline {
         stage('Build Docker image'){
             steps {
               
-                bat 'docker image build -t spring-docker-jenkins-app2  .'
+            //    bat 'docker image build -t spring-docker-jenkins-app2  .'
             }
         }
 
@@ -39,14 +39,14 @@ pipeline {
 
         stage('Docker Push'){
             steps {
-                bat 'docker push aruna708/spring-docker-jenkins-app2'
+                bat 'docker push aruna708/spring-docker-jenkins-app1'
             }
         }
         
         stage('Docker deploy'){
           steps {
                
-              bat 'docker run -itd -p  8086:8086 aruna708/spring-docker-jenkins-app2'
+              bat 'docker run -itd -p  8086:8086 aruna708/spring-docker-jenkins-app1'
             }
         }
 
