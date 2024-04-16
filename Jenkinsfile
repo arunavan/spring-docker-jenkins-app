@@ -1,45 +1,32 @@
 pipeline {
     agent any
-    tools { 
-      maven 'MAVEN_HOME' 
-      jdk 'JDK_HOME' 
-    }
+    
     stages {
         stage('Compile and Clean') { 
             steps {
 
-                sh "mvn -f spring-docker-jenkins-app/pom.xml compile"
+                bat "mvn clean compile"
             }
         }
        
-		stage('Junit5 Test') { 
-            steps {
-
-                sh "mvn -f spring-docker-jenkins-app/pom.xml test"
-            }
-        }
+		
         
         stage('SonarQube'){
 			steps{
-				sh label: '', script: '''mvn sonar:sonar \
-				-Dsonar.host.url=http://CDLVDIDEVMAN499:9000 \
-				-Dsonar.login=7b83054b6ec615206ca18a7af169c491741a5786'''
+				bat label: '', script: '''mvn sonar:sonar \
+				-Dsonar.host.url=http://localhost:9000 \
+				-Dsonar.login=squ_75d790bab41cb01cf7594d6e78b0868cfb8d065b'''
 			}
    		}
         
-        stage('Maven Build') { 
+     
+
+        stage('Build Docker image'){
             steps {
-                sh "mvn -f spring-docker-jenkins-app/pom.xml clean install"
+              
+                bat 'docker image build -t spring-docker-jenkins-app  .'
             }
         }
-
-
-        //stage('Build Docker image'){
-            //steps {
-              
-                //sh 'docker build -t  9246115521/docker_jenkins_springboot:${BUILD_NUMBER} .'
-            //}
-        //}
 
         //stage('Docker Login'){
             
@@ -50,25 +37,21 @@ pipeline {
             //}                
         
 
-       // stage('Docker Push'){
-           // steps {
-            //    sh 'docker push 9246115521/docker_jenkins_springboot:${BUILD_NUMBER}'
-          //  }
-       // }
+        stage('Docker Push'){
+            steps {
+                bat 'docker push aruna708/spring-docker-jenkins-app'
+            }
+        }
         
-       // stage('Docker deploy'){
-        //    steps {
+        stage('Docker deploy'){
+          steps {
                
-            //    sh 'docker run -itd -p  8081:8080 9246115521/docker_jenkins_springboot:${BUILD_NUMBER}'
-          //  }
-       // }
+              bat 'docker run -itd -p  8086:8086 aruna708/spring-docker-jenkins-app'
+            }
+        }
 
         
-       // stage('Archiving') { 
-          //  steps {
-             //    archiveArtifacts '**/target/*.jar'
-          //  }
-     //   }
+      
      
     }
 }
