@@ -1,5 +1,5 @@
 FROM openjdk:17-jdk-slim
-copy ./target/spring-docker-jenkins-app-0.0.1-SNAPSHOT.jar spring-docker-jenkins-app-0.0.1-SNAPSHOT.jar
-CMD ["java","-jar","spring-docker-jenkins-app-0.0.1-SNAPSHOT.jar"]
+copy ./target/spring-boot-docker-jenkins.jar spring-boot-docker-jenkins.jar
+CMD ["java","-jar","spring-boot-docker-jenkins.jar"]
 
 EXPOSE 8086
