@@ -1,5 +1,4 @@
-FROM openjdk:17-jdk-slim
-
+FROM openjdk17
 copy ./target/spring-docker-jenkins-app-0.0.1-SNAPSHOT.jar spring-docker-jenkins-app-0.0.1-SNAPSHOT.jar
 CMD ["java","-jar","spring-docker-jenkins-app-0.0.1-SNAPSHOT.jar"]
 
