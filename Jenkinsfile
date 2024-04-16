@@ -39,14 +39,14 @@ pipeline {
 
         stage('Docker Push'){
             steps {
-                bat 'docker push aruna708/spring-docker-jenkins-app1'
+                bat 'docker push aruna708/spring-docker-jenkins-app1:latest'
             }
         }
         
         stage('Docker deploy'){
           steps {
                
-              bat 'docker run -itd -p  8086:8086 aruna708/spring-docker-jenkins-app1'
+              bat 'docker run -itd -p  8086:8086 aruna708/spring-docker-jenkins-app1:latest'
             }
         }
 
