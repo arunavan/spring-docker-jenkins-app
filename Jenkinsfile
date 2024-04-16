@@ -21,12 +21,12 @@ pipeline {
         
      
 
-        stage('Build Docker image'){
-            steps {
+     //   stage('Build Docker image'){
+       //     steps {
               
             //    bat 'docker image build -t spring-docker-jenkins-app2  .'
-            }
-        }
+         //   }
+        //}
 
         //stage('Docker Login'){
             
