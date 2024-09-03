@@ -28,13 +28,13 @@ pipeline {
            }
         }
 
-        stage('Docker Login'){
+      //  stage('Docker Login'){
             
-            steps {
-                 withCredentials([string(credentialsId: 'DockerId', variable: 'Dockerpwd')]) {
-                    sh "docker login -u arunajava567 -p ${varthr708}"
-                }
-            }                
+       //     steps {
+        //         withCredentials([string(credentialsId: 'DockerId', variable: 'Dockerpwd')]) {
+         //           sh "docker login -u arunajava567 -p ${varthr708}"
+         //       }
+        //    }                
         
 
         stage('Docker Push'){
