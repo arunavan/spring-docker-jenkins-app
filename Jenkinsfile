@@ -39,6 +39,7 @@ pipeline {
 
         stage('Docker Push'){
             steps {
+		     bat 'docker tag spring-docker-jenkins-app1 arunajava567/spring-docker-jenkins-app1:latest'
                 bat 'docker push arunajava567/spring-docker-jenkins-app1:latest'
             }
         }
